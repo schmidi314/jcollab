@@ -5,3 +5,4 @@ spike/
 labext/node_modules/
 labext/lib/
 labext/tsconfig.tsbuildinfo
+dist/
