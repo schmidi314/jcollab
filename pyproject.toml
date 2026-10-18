@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jcollab"
-version = "0.1.0"
+version = "0.1.1"
 description = "MCP server for live co-editing and running of JupyterLab notebooks (Yjs, verified writes, multi-instance discovery)"
 requires-python = ">=3.10"
 license = "MIT"
@@ -25,3 +25,8 @@ jcollab = "jcollab.server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/jcollab"]
+
+# Lab extension jcollab-scroll (scrolls the notebook to the cell point_at targets); built output in labext/.
+[tool.hatch.build.targets.wheel.shared-data]
+"labext/jcollab_scroll/labextension" = "share/jupyter/labextensions/jcollab-scroll"
+"labext/install.json" = "share/jupyter/labextensions/jcollab-scroll/install.json"

@@ -26,8 +26,9 @@ From source:
     python3 -m venv .venv && .venv/bin/pip install .
     claude mcp add --scope user jcollab -- $PWD/.venv/bin/jcollab
 
-Optional lab extension `labext/` (`jcollab-scroll`): scrolls the user's notebook to the cell `point_at` targets. Install it
-into the interpreter of `jupyter-lab` with `pip install ./labext`, then restart JupyterLab.
+Lab extension `jcollab-scroll` (scrolls the user's notebook to the cell `point_at` targets) is part of the package. Install
+it into the interpreter of `jupyter-lab` with `pip install --no-deps jcollab`, then restart JupyterLab. Source and built
+output: `labext/`.
 
 Requires a JupyterLab with `jupyter-collaboration`. Keep `jupyter-ydoc` of this package on the same major version as the
 server's (pinned `>=3,<4`; see `sync_health`).
