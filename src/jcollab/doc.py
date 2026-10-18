@@ -9,6 +9,7 @@ from __future__ import annotations
 import asyncio
 import copy
 import difflib
+import time
 from typing import Any
 
 from jupyter_nbmodel_client import NbModelClient, get_jupyter_notebook_websocket_url
@@ -196,7 +197,8 @@ class DocSession:
                 return False, f"file on server differs from the live document (cells {diff}, file has {len(have)} cells, live has {len(want)}: ids {ids})"
             await asyncio.sleep(0.25)
 
-    async def point_at(self, ref: int | str, seconds: float = 30.0, select: bool = True) -> dict[str, Any]:
+    async def point_at(self, ref: int | str, seconds: float = 30.0, select: bool = True, scroll: bool = True,
+                       force_scroll: bool = False, label: str | None = None) -> dict[str, Any]:
         """Show a labelled "Metis" cursor/selection in a cell for a while (visible in every open tab, and reachable via
         the Collaborators sidebar of JupyterLab)."""
         nb = await self.ensure()
@@ -211,6 +213,8 @@ class DocSession:
         nb.set_local_state_field("user", {"username": "metis", "name": "Metis", "display_name": "Metis", "initials": "M",
                                           "avatar_url": None, "color": "#d97757"})
         nb.set_local_state_field("cursors", [{"anchor": anchor, "head": head, "primary": True, "empty": not (select and n > 1)}])
+        if scroll:
+            nb.set_local_state_field("scrollTo", {"cell": doc.ycells[i].get("id"), "nonce": str(time.time_ns()), "force": force_scroll, "label": label})
         if self._pointer is not None:
             self._pointer.cancel()
 
@@ -218,6 +222,7 @@ class DocSession:
             await asyncio.sleep(seconds)
             try:
                 nb.set_local_state_field("cursors", [])
+                nb.set_local_state_field("scrollTo", None)
             except Exception:  # noqa: BLE001
                 pass
         self._pointer = asyncio.create_task(clear())

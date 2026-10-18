@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[project]
+name = "jcollab-scroll"
+version = "0.1.0"
+description = "JupyterLab: scroll to the cell jcollab's point_at targets"
+requires-python = ">=3.9"
+[tool.hatch.build.targets.wheel]
+packages = ["jcollab_scroll"]
+[tool.hatch.build.targets.wheel.shared-data]
+"jcollab_scroll/labextension" = "share/jupyter/labextensions/jcollab-scroll"
+"install.json" = "share/jupyter/labextensions/jcollab-scroll/install.json"

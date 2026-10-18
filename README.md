@@ -12,12 +12,22 @@ document, so open browser tabs update immediately and cells look exactly as if t
 * **Tools:** list_instances, list_notebooks, read_notebook, read_cell (images), insert_cell, insert_cell_at_start, edit_cell,
   change_cell_type, delete_cell, move_cell, split_cell, merge_cells, get_metadata, set_metadata (cell/notebook),
   run_cell, run_cells, run_code, clear_outputs, inspect_variables, kernel_status, interrupt_kernel, restart_kernel,
-  sync_health.
+  sync_health, user_focus, point_at, find_mentions, add_comment.
 
 ## Install
 
+From PyPI:
+
+    pip install jcollab
+    claude mcp add --scope user jcollab -- jcollab
+
+From source:
+
     python3 -m venv .venv && .venv/bin/pip install .
     claude mcp add --scope user jcollab -- $PWD/.venv/bin/jcollab
+
+Optional lab extension `labext/` (`jcollab-scroll`): scrolls the user's notebook to the cell `point_at` targets. Install it
+into the interpreter of `jupyter-lab` with `pip install ./labext`, then restart JupyterLab.
 
 Requires a JupyterLab with `jupyter-collaboration`. Keep `jupyter-ydoc` of this package on the same major version as the
 server's (pinned `>=3,<4`; see `sync_health`).

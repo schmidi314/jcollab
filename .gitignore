@@ -2,3 +2,6 @@
 __pycache__/
 *.egg-info/
 spike/
+labext/node_modules/
+labext/lib/
+labext/tsconfig.tsbuildinfo

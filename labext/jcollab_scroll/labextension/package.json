@@ -1,0 +1,33 @@
+{
+  "name": "jcollab-scroll",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Scroll JupyterLab notebooks to the cell a collaborator (Metis) points at",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*.js"
+  ],
+  "scripts": {
+    "build:lib": "tsc",
+    "build:labextension": "jupyter labextension build .",
+    "build": "npm run build:lib && npm run build:labextension"
+  },
+  "dependencies": {
+    "@jupyter/ydoc": "^3.1.0",
+    "@jupyterlab/application": "^4.0.0",
+    "@jupyterlab/apputils": "^4.0.0",
+    "@jupyterlab/notebook": "^4.0.0"
+  },
+  "devDependencies": {
+    "@jupyterlab/builder": "~4.5.7",
+    "typescript": "~5.5.4"
+  },
+  "jupyterlab": {
+    "extension": true,
+    "outputDir": "jcollab_scroll/labextension",
+    "_build": {
+      "load": "static/remoteEntry.01308e5321350a3592c6.js",
+      "extension": "./extension"
+    }
+  }
+}

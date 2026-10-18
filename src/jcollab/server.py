@@ -428,11 +428,14 @@ async def restart_kernel(path: str, instance: str | None = None, run_all: bool =
 
 
 @mcp.tool()
-async def point_at(path: str, cell: int | str, seconds: float = 30, select: bool = True, instance: str | None = None) -> dict:
+async def point_at(path: str, cell: int | str, seconds: float = 30, select: bool = True, instance: str | None = None,
+                   scroll: bool = True, force_scroll: bool = False, label: str | None = None) -> dict:
     """Show the user which cell you mean: a labelled "Metis" selection appears in that cell in every open tab (and the
     user can jump to it via JupyterLab's Collaborators sidebar). Still also name the cell in words (heading above it,
-    first line), the user may not have the notebook scrolled there."""
-    return await (await _ds(instance, path)).point_at(cell, seconds, select)
+    first line), the user may not have the notebook scrolled there. With the jcollab-scroll lab extension, the user's
+    notebook scrolls to the cell (a toast instead while they type elsewhere, unless force_scroll); label is shown in that toast."""
+    return await (await _ds(instance, path)).point_at(cell, seconds=seconds, select=select, scroll=scroll,
+                                                      force_scroll=force_scroll, label=label)
 
 
 @mcp.tool()
